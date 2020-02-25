@@ -38,6 +38,7 @@ class Self {
     /**
      * Retrieves and returns a list of users
      */
+    static async getUsers() {}
 }
 
 export default Self;
