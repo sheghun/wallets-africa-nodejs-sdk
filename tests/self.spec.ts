@@ -23,4 +23,35 @@ describe('Self resource tests', function() {
         });
     });
 
+    it('Transactions', async function() {
+        const res = await wallet.self.transactions();
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+            },
+        });
+    });
+
+    it('Verify BVN', async function() {
+        const res = await wallet.self.verifyBvn({
+            bvn: process.env.BVN as string,
+            dateOfBirth: process.env.BVN_DATE as string,
+        });
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            BVN: process.env.BVN as string,
+            
+        });
+    });
+
+    it('Get Wallets', async function() {
+        const res = await wallet.self.getWallets();
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+            },
+        });
+    });
 });

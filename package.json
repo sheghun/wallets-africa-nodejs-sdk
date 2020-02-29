@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "env SECRET_KEY=3aj6rnhtdrpx PUBLIC_KEY=b9xfrwkgwbxg mocha -r ts-node/register tests/\\*\\*/\\*.spec.ts --timeout 15000"
+    "test": "env SECRET_KEY= PUBLIC_KEY= BVN= BVN_DATE= mocha -r ts-node/register tests/\\*\\*/\\*.spec.ts --timeout 15000"
   },
   "dependencies": {
     "@types/node": "^13.7.4",

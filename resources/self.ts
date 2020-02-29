@@ -19,28 +19,61 @@ class Self {
      *
      * @param currency - currency to get balance in
      */
-    static async checkBalance(currency = 'NGN') {
+    static async checkBalance(currency: currency = 'NGN') {
         const body = {currency, SecretKey: this.secretKey};
         const url = `${ApiRoot}${this.endpoint}/balance`;
 
-        return axios.post(url, body, );
+        return axios.post(url, body);
     }
 
     /**
      * Retrieves and returns a list of performed transactions within a specified time period
      *
      */
-    static async transactions() {}
+    static async transactions(options: TransactionOptions = {}) {
+        const body = {...options, SecretKey: this.secretKey, currency: 'NGN'};
+        const url = `${ApiRoot}${this.endpoint}/transactions`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Verifies BVN
      */
-    static async verifyBvn() {}
+    static async verifyBvn(options: BvnOptions) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/verifybvn`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Retrieves and returns a list of users
      */
-    static async getUsers() {}
+    static async getWallets() {
+        const body = {SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/users`;
+
+        return axios.post(url, body);
+    }
 }
 
 export default Self;
+
+type currency = 'NGN' | 'USD' | 'GHS' | 'KES';
+
+interface TransactionOptions {
+    skip?: number;
+    take?: number;
+    // A valid date format in string
+    dateFrom?: string | Date;
+    // A valid date format in string
+    dateTo?: '2020-01-15';
+    transactionType?: number;
+    currency?: currency;
+}
+
+interface BvnOptions {
+    bvn: string;
+    dateOfBirth: string | Date;
+}
