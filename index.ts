@@ -1,22 +1,25 @@
+import axios from 'axios';
 import Self from './resources/self';
+
 /**
  * @class WalletAfrica
- * @author sheghun <github.com/sheghun>
- * @link https://github.com/sheghun/wallets-africa-nodejs-sdk
+ * @author sheghun {@link https://github.com/sheghun}
+ * {@link https://github.com/sheghun/wallets-africa-nodejs-sdk}
  *
  * Wallets Africa wrapper for communicating with the wallets africa api
  */
 class WalletAfrica {
-    private _key: string;
     public self = Self;
 
     /**
      *
-     * @param key - secret key
+     * @param keys - secret and public key
      */
-    constructor(key: string) {
-        this._key = key;
-        this.self.key = key;
+    constructor(keys: {secretKey: string; publicKey: string}) {
+        axios.defaults.headers.Authorization = `Bearer ${keys.publicKey}`;
+        axios.defaults.headers['Content-Type'] = 'application/json';
+
+        this.self.secretKey = keys.secretKey;
     }
 }
 
