@@ -6,7 +6,7 @@ class Wallet {
     /*
         Api key
      */
-    static key = '';
+    static secretKey = '';
 
     static endpoint = '/wallet';
 
