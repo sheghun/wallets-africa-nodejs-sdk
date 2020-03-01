@@ -1,6 +1,6 @@
 /**
  *  All Airtime functionality and methods
- * @class Airime
+ * @class Airtime
  */
 class Airtime {
     /*
@@ -8,7 +8,7 @@ class Airtime {
      */
     static secretKey = '';
 
-    static endpoint = '/airtime';
+    static endpoint = '/bills/airtime';
 
     /*
         Returns a list of all airtime providers
