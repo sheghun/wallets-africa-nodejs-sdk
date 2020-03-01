@@ -21,7 +21,7 @@ declare interface BankTransOptions {
     Amount: number;
 }
 
-interface CreateOptions {
+declare interface CreateOptions {
     firstName: string;
     lastName: string;
     email: string;
