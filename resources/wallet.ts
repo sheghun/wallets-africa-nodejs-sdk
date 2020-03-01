@@ -1,6 +1,6 @@
 /**
- *  All wallet self functionality and methods
- * @class Self
+ *  All wallet functionality and methods
+ * @class wallet
  */
 class Wallet {
     /*
@@ -12,33 +12,36 @@ class Wallet {
 
     /**
      * Performs a debit on a sub wallet
-     * @param {dc} t
      */
-    static async debit(options: dc) {}
+    static async debit(options: {
+        transactionReference: string;
+        amount: number;
+        phoneNumber: string;
+    }) {}
 
     /**
      * Performs a credit on a sub wallet
-     * @param {dc} t
      */
-    static async credit(options: dc) {}
+    static async credit(options: {
+        transactionReference: string;
+        amount: number;
+        phoneNumber: string;
+    }) {}
 
     /**
      * Creates a new customer
-     * @params {create} t
      */
-    static async create(options: create) {}
+    static async create(options: CreateOptions) {}
 
     /**
      * Verifies new customer
-     * @params {verify} t
      */
-    static async verify(options: {phone: string; otp: string}) {}
+    static async verify(options: {phoneNumber: string; otp: string}) {}
 
     /**
      * Generate
-     * @params {create & {currency: string}} t
      */
-    static async generate(options: create & {currency: string}) {}
+    static async generate(options: CreateOptions & {currency: string}) {}
 
     /**
      * Generates account number
@@ -54,17 +57,17 @@ class Wallet {
     /**
      * Sets password against a phone number
      */
-    static async setPassword(options: {phone: string; password: string}) {}
+    static async setPassword(options: {phoneNumber: string; password: string}) {}
 
     /**
      * Sets pin
      */
-    static async setPin(options: {phone: string; pin: string}) {}
+    static async setPin(options: {phoneNumber: string; pin: string}) {}
 
     /**
      * Returns transaction
      */
-    static async transactions(options: TransactionOptionsType & {transactionPin: string}) {}
+    static async transactions(options: TransactionOptions & {transactionPin: string}) {}
 
     /**
      * Verifies BVN
@@ -83,18 +86,3 @@ class Wallet {
 }
 
 export default Wallet;
-
-interface dc {
-    transactionReference: string;
-    amount: number;
-    phone: string;
-}
-
-interface create {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    password: string;
-    dateOfBirth: string | Date;
-}

@@ -30,7 +30,7 @@ class Self {
      * Retrieves and returns a list of performed transactions within a specified time period
      *
      */
-    static async transactions(options: TransactionOptionsType = {}) {
+    static async transactions(options: TransactionOptions = {}) {
         const body = {...options, SecretKey: this.secretKey, currency: 'NGN'};
         const url = `${ApiRoot}${this.endpoint}/transactions`;
 
