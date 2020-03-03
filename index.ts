@@ -12,17 +12,21 @@ import Wallet from './resources/wallet';
 class WalletAfrica {
     public self = Self;
     public wallet = Wallet;
+    private _apiRoot = '';
 
     /**
      *
-     * @param keys - secret and public key
+     * @param options - secret and public key
      */
-    constructor(keys: {secretKey: string; publicKey: string}) {
-        axios.defaults.headers.Authorization = `Bearer ${keys.publicKey}`;
+    constructor(options: {secretKey: string; publicKey: string; sandbox?: true}) {
+        axios.defaults.headers.Authorization = `Bearer ${options.publicKey}`;
         axios.defaults.headers['Content-Type'] = 'application/json';
+        axios.defaults.baseURL = options.sandbox
+            ? 'https://sandbox.wallets.africa'
+            : 'https://api.wallets.africa';
 
-        this.self.secretKey = keys.secretKey;
-        this.wallet.secretKey = keys.secretKey;
+        this.self.secretKey = options.secretKey;
+        this.wallet.secretKey = options.secretKey;
     }
 }
 

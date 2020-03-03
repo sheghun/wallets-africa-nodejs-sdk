@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "test": "npm run build && env PHONE=2348143112637 SECRET_KEY=3aj6rnhtdrpx PUBLIC_KEY=b9xfrwkgwbxg BVN=22474013120 BVN_DATE=1999-06-22 mocha dist/tests/\\*\\*/\\*.spec.js --timeout 15000 && rm -rf dist",
+        "test": "npm run build && env SECRET_KEY=3aj6rnhtdrpx PUBLIC_KEY=b9xfrwkgwbxg BVN=22474013120 BVN_DATE=1999-06-22 mocha dist/tests/\\*\\*/\\*.spec.js --timeout 15000 && rm -rf dist",
         "build": "tsc && cp types.d.ts dist/types.d.ts && cp package.json dist/package.json"
     },
     "dependencies": {

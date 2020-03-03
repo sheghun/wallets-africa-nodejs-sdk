@@ -8,9 +8,9 @@ declare interface TransactionOptions {
     // A valid date format in string
     dateTo?: '2020-01-15';
     transactionType?: number;
+    transactionPin?: string | number;
     currency?: currencyType;
 }
-
 
 declare interface BankTransOptions {
     SecretKey: string;

@@ -1,4 +1,3 @@
-import {ApiRoot} from '../constants';
 import axios from 'axios';
 
 /**
@@ -22,7 +21,7 @@ class Wallet {
         phoneNumber: string;
     }) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/debit`;
+        const url = `${this.endpoint}/debit`;
 
         return axios.post(url, body);
     }
@@ -36,7 +35,7 @@ class Wallet {
         phoneNumber: string;
     }) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/credit`;
+        const url = `${this.endpoint}/credit`;
 
         return axios.post(url, body);
     }
@@ -46,7 +45,7 @@ class Wallet {
      */
     static async create(options: CreateOptions) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/create`;
+        const url = `${this.endpoint}/create`;
 
         return axios.post(url, body);
     }
@@ -56,7 +55,7 @@ class Wallet {
      */
     static async verify(options: {phoneNumber: string; otp: string}) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/verify`;
+        const url = `${this.endpoint}/verify`;
 
         return axios.post(url, body);
     }
@@ -69,7 +68,7 @@ class Wallet {
             options.currency = 'NGN';
         }
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/generate`;
+        const url = `${this.endpoint}/generate`;
 
         return axios.post(url, body);
     }
@@ -80,7 +79,7 @@ class Wallet {
      */
     static async generateAccountNumber(phone: string) {
         const body = {phoneNumber: phone, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/generateaccountnumber`;
+        const url = `${this.endpoint}/generateaccountnumber`;
 
         return axios.post(url, body);
     }
@@ -90,7 +89,7 @@ class Wallet {
      */
     static async retrieveAccountNumber(phone: string) {
         const body = {phoneNumber: phone, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/nuban`;
+        const url = `${this.endpoint}/nuban`;
 
         return axios.post(url, body);
     }
@@ -100,7 +99,7 @@ class Wallet {
      */
     static async setPassword(options: {phoneNumber: string; password: string}) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/password`;
+        const url = `${this.endpoint}/password`;
 
         return axios.post(url, body);
     }
@@ -110,7 +109,7 @@ class Wallet {
      */
     static async setPin(options: {phoneNumber: string; transactionPin: string}) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/pin`;
+        const url = `${this.endpoint}/pin`;
 
         return axios.post(url, body);
     }
@@ -119,8 +118,9 @@ class Wallet {
      * Returns transaction
      */
     static async transactions(options: TransactionOptions & {transactionPin: string}) {
+        options.currency = options.currency ? options.currency : 'NGN';
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/transactions`;
+        const url = `${this.endpoint}/transactions`;
 
         return axios.post(url, body);
     }
@@ -130,7 +130,7 @@ class Wallet {
      */
     static async verifyBvn(options: {dateOfBirth: string; bvn: string; phoneNumber: string}) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/verifybvn`;
+        const url = `${this.endpoint}/verifybvn`;
 
         return axios.post(url, body);
     }
@@ -140,7 +140,7 @@ class Wallet {
      */
     static async getUser(phone: string) {
         const body = {phoneNumber: phone, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/getuser`;
+        const url = `${this.endpoint}/getuser`;
 
         return axios.post(url, body);
     }
@@ -158,7 +158,7 @@ class Wallet {
         }
 
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/balance`;
+        const url = `${this.endpoint}/balance`;
 
         return axios.post(url, body);
     }
