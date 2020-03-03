@@ -1,3 +1,6 @@
+import {ApiRoot} from '../constants';
+import axios from 'axios';
+
 /**
  *  All wallet functionality and methods
  * @class wallet
@@ -17,7 +20,12 @@ class Wallet {
         transactionReference: string;
         amount: number;
         phoneNumber: string;
-    }) {}
+    }) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/debit`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Performs a credit on a sub wallet
@@ -26,63 +34,134 @@ class Wallet {
         transactionReference: string;
         amount: number;
         phoneNumber: string;
-    }) {}
+    }) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/credit`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Creates a new customer
      */
-    static async create(options: CreateOptions) {}
+    static async create(options: CreateOptions) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/create`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Verifies new customer
      */
-    static async verify(options: {phoneNumber: string; otp: string}) {}
+    static async verify(options: {phoneNumber: string; otp: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/verify`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Generate
      */
-    static async generate(options: CreateOptions & {currency: string}) {}
+    static async generate(options: CreateOptions & {currency?: string}) {
+        if (!('currency' in options)) {
+            options.currency = 'NGN';
+        }
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/generate`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Generates account number
      * @params {string} phone - phone to generate account number against
      */
-    static async generateAccountNumber(phone: string) {}
+    static async generateAccountNumber(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/generateaccountnumber`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Retrieves account number
      */
-    static async retrieveAccountNumber(phone: string) {}
+    static async retrieveAccountNumber(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/nuban`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Sets password against a phone number
      */
-    static async setPassword(options: {phoneNumber: string; password: string}) {}
+    static async setPassword(options: {phoneNumber: string; password: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/password`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Sets pin
      */
-    static async setPin(options: {phoneNumber: string; pin: string}) {}
+    static async setPin(options: {phoneNumber: string; transactionPin: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/pin`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Returns transaction
      */
-    static async transactions(options: TransactionOptions & {transactionPin: string}) {}
+    static async transactions(options: TransactionOptions & {transactionPin: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/transactions`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Verifies BVN
      */
-    static async verifyBvn(options: {dateOfBirth: string; bvn: string; phoneNumber: string}) {}
+    static async verifyBvn(options: {dateOfBirth: string; bvn: string; phoneNumber: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/verifybvn`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Gets a user
      */
-    static async getUser(phone: string) {}
+    static async getUser(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/getuser`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Returns wallet balance
      */
-    static async getBalance(phone: string) {}
+    static async getBalance(options: {
+        phoneNumber: string;
+        transactionPin: string;
+        currency?: currencyType;
+    }) {
+        if (!('currency' in options)) {
+            options.currency = 'NGN';
+        }
+
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${ApiRoot}${this.endpoint}/balance`;
+
+        return axios.post(url, body);
+    }
 }
 
 export default Wallet;

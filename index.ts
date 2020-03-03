@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Self from './resources/self';
+import Wallet from './resources/wallet';
 
 /**
  * @class WalletAfrica
@@ -10,6 +11,7 @@ import Self from './resources/self';
  */
 class WalletAfrica {
     public self = Self;
+    public wallet = Wallet;
 
     /**
      *
@@ -20,6 +22,7 @@ class WalletAfrica {
         axios.defaults.headers['Content-Type'] = 'application/json';
 
         this.self.secretKey = keys.secretKey;
+        this.wallet.secretKey = keys.secretKey;
     }
 }
 
