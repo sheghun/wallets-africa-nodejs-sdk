@@ -4,8 +4,7 @@
     "description": "Nodejs API wrapper for wallets africa ",
     "main": "index.js",
     "directories": {
-        "test": "npm run build && env SECRET_KEY= PUBLIC_KEY= BVN= BVN_DATE= mocha dist/tests/\\*\\*/\\*.spec.js --timeout 15000 && rm -rf dist",
-        "build": "tsc && cp types.d.ts dist/types.d.ts && cp package.json dist/package.json"
+        "test": "test"
     },
     "dependencies": {
         "axios": "^0.19.2"
@@ -30,7 +29,8 @@
         "mocha": "^7.0.1"
     },
     "scripts": {
-        "test": "test"
+        "test": "npm run build && env SECRET_KEY= PUBLIC_KEY= BVN= BVN_DATE= mocha dist/tests/\\*\\*/\\*.spec.js --timeout 15000 && rm -rf dist",
+        "build": "tsc && cp types.d.ts dist/ && cp package.json dist/ && cp README.md dist/"
     },
     "repository": {
         "type": "git",
