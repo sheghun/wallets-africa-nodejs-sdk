@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Self from './resources/self';
 import Wallet from './resources/wallet';
+import Bank from "./resources/bank";
 
 /**
  * @class WalletAfrica
@@ -12,6 +13,7 @@ import Wallet from './resources/wallet';
 class WalletAfrica {
     public self = Self;
     public wallet = Wallet;
+    public bank = Bank
     private _apiRoot = '';
 
     /**
@@ -27,6 +29,7 @@ class WalletAfrica {
 
         this.self.secretKey = options.secretKey;
         this.wallet.secretKey = options.secretKey;
+        this.bank.secretKey = options.secretKey;
     }
 }
 
