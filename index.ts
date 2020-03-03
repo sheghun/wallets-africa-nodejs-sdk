@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Self from './resources/self';
+import Wallet from './resources/wallet';
+import Bank from "./resources/bank";
 
 /**
  * @class WalletAfrica
@@ -10,16 +12,24 @@ import Self from './resources/self';
  */
 class WalletAfrica {
     public self = Self;
+    public wallet = Wallet;
+    public bank = Bank
+    private _apiRoot = '';
 
     /**
      *
-     * @param keys - secret and public key
+     * @param options - secret and public key
      */
-    constructor(keys: {secretKey: string; publicKey: string}) {
-        axios.defaults.headers.Authorization = `Bearer ${keys.publicKey}`;
+    constructor(options: {secretKey: string; publicKey: string; sandbox?: true}) {
+        axios.defaults.headers.Authorization = `Bearer ${options.publicKey}`;
         axios.defaults.headers['Content-Type'] = 'application/json';
+        axios.defaults.baseURL = options.sandbox
+            ? 'https://sandbox.wallets.africa'
+            : 'https://api.wallets.africa';
 
-        this.self.secretKey = keys.secretKey;
+        this.self.secretKey = options.secretKey;
+        this.wallet.secretKey = options.secretKey;
+        this.bank.secretKey = options.secretKey;
     }
 }
 

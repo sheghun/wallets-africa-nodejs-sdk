@@ -1,6 +1,5 @@
 import WalletAfrica from '../index';
 import {assert, expect} from 'chai';
-import {AxiosError} from 'axios';
 
 /*
    Self resource tests file
@@ -10,6 +9,7 @@ import {AxiosError} from 'axios';
 const wallet = new WalletAfrica({
     secretKey: process.env.SECRET_KEY as string,
     publicKey: process.env.PUBLIC_KEY as string,
+    sandbox: true,
 });
 
 describe('Self resource tests', function() {
@@ -41,7 +41,6 @@ describe('Self resource tests', function() {
         assert.strictEqual(res.status, 200);
         assert.containsAllDeepKeys(res.data, {
             BVN: process.env.BVN as string,
-            
         });
     });
 

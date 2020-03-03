@@ -1,71 +1,167 @@
+import axios from 'axios';
+
 /**
- *  All wallet self functionality and methods
- * @class Self
+ *  All wallet functionality and methods
+ * @class wallet
  */
 class Wallet {
     /*
         Api key
      */
-    static key = '';
+    static secretKey = '';
 
     static endpoint = '/wallet';
 
     /**
      * Performs a debit on a sub wallet
-     * @param {dc} t
      */
-    static async debit(t: dc) {}
+    static async debit(options: {
+        transactionReference: string;
+        amount: number;
+        phoneNumber: string;
+    }) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/debit`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Performs a credit on a sub wallet
-     * @param {dc} t
      */
-    static async credit(t: dc) {}
+    static async credit(options: {
+        transactionReference: string;
+        amount: number;
+        phoneNumber: string;
+    }) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/credit`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Creates a new customer
-     * @params {create} t
      */
-    static async create(t: create) {}
+    static async create(options: CreateOptions) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/create`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Verifies new customer
-     * @params {verify} t
      */
-    static async verify(t: verify) {}
+    static async verify(options: {phoneNumber: string; otp: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/verify`;
+
+        return axios.post(url, body);
+    }
 
     /**
      * Generate
-     * @params {create & {currency: string}} t
      */
-    static async generate(t: create & {currency: string}) {}
+    static async generate(options: CreateOptions & {currency?: string}) {
+        if (!('currency' in options)) {
+            options.currency = 'NGN';
+        }
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/generate`;
+
+        return axios.post(url, body);
+    }
 
     /**
-     * Generates account Number
-     * @params {{phoneNumber: string, secretKey: string}}
+     * Generates account number
+     * @params {string} phone - phone to generate account number against
      */
-    static async generateAccountNumber(t: {phoneNumber: string; secretKey: string}) {}
+    static async generateAccountNumber(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/generateaccountnumber`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Retrieves account number
+     */
+    static async retrieveAccountNumber(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/nuban`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Sets password against a phone number
+     */
+    static async setPassword(options: {phoneNumber: string; password: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/password`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Sets pin
+     */
+    static async setPin(options: {phoneNumber: string; transactionPin: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/pin`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Returns transaction
+     */
+    static async transactions(options: TransactionOptions & {transactionPin: string}) {
+        options.currency = options.currency ? options.currency : 'NGN';
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/transactions`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Verifies BVN
+     */
+    static async verifyBvn(options: {dateOfBirth: string; bvn: string; phoneNumber: string}) {
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/verifybvn`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Gets a user
+     */
+    static async getUser(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/getuser`;
+
+        return axios.post(url, body);
+    }
+
+    /**
+     * Returns wallet balance
+     */
+    static async getBalance(options: {
+        phoneNumber: string;
+        transactionPin: string;
+        currency?: currencyType;
+    }) {
+        if (!('currency' in options)) {
+            options.currency = 'NGN';
+        }
+
+        const body = {...options, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/balance`;
+
+        return axios.post(url, body);
+    }
 }
 
 export default Wallet;
-
-interface dc {
-    transactionReference: string;
-    amount: number;
-    phoneNumber: string;
-}
-
-interface create {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    password: string;
-    dateOfBirth: string | Date;
-}
-
-interface verify {
-    phoneNumber: string;
-    otp: string;
-    secretKey: string;
-}
