@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {ApiRoot} from '../constants';
 
 /**
  * @class Self
@@ -21,7 +20,7 @@ class Self {
      */
     static async checkBalance(currency: currencyType = 'NGN') {
         const body = {currency, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/balance`;
+        const url = `${this.endpoint}/balance`;
 
         return axios.post(url, body);
     }
@@ -32,7 +31,7 @@ class Self {
      */
     static async transactions(options: TransactionOptions = {}) {
         const body = {...options, SecretKey: this.secretKey, currency: 'NGN'};
-        const url = `${ApiRoot}${this.endpoint}/transactions`;
+        const url = `${this.endpoint}/transactions`;
 
         return axios.post(url, body);
     }
@@ -42,7 +41,7 @@ class Self {
      */
     static async verifyBvn(options: {bvn: string; dateOfBirth: string | Date}) {
         const body = {...options, SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/verifybvn`;
+        const url = `${this.endpoint}/verifybvn`;
 
         return axios.post(url, body);
     }
@@ -52,7 +51,7 @@ class Self {
      */
     static async getWallets() {
         const body = {SecretKey: this.secretKey};
-        const url = `${ApiRoot}${this.endpoint}/users`;
+        const url = `${this.endpoint}/users`;
 
         return axios.post(url, body);
     }
