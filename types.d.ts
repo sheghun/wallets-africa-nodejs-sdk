@@ -6,7 +6,7 @@ declare interface TransactionOptions {
     // A valid date format in string
     dateFrom?: string | Date;
     // A valid date format in string
-    dateTo?: '2020-01-15';
+    dateTo?: string | Date;
     transactionType?: number;
     transactionPin?: string | number;
     currency?: currencyType;
