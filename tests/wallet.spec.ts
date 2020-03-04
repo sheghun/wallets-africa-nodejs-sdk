@@ -49,6 +49,7 @@ describe('Wallet resource tests', function() {
         assert.containsAllDeepKeys(res.data, {
             Response: {
                 ResponseCode: '200',
+                Message: 'Wallet created successfully',
             },
             Data: expData,
         });
