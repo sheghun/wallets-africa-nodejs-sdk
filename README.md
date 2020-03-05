@@ -18,7 +18,7 @@ Nodejs API wrapper for [Wallets Africa](https://wallets.africa/)
 
 ```
 npm install wallets-africa
-```                           
+```
 
 ### Usage
 
@@ -32,7 +32,6 @@ const walletAfrica = new WalletAfrica({
 });
 
 try {
-    // fix: inconsistent variable name
     const res = await walletAfrica.self.checkBalance(); // Checks wallet balance takes an optional argument of curreny to check in
     if (res.status === 200) {
         // Successful
@@ -81,10 +80,10 @@ try {
 ```
 
 ##### Note
-All calls to the api under hood uses axios, so all methods returns an axios response. 
+
+All calls to the api under hood uses axios, so all methods returns an axios response.
 
 All files are compiled to JavaScript and only the necessary files are published
-
 
 ### Resources
 
@@ -95,8 +94,11 @@ All files are compiled to JavaScript and only the necessary files are published
 -   Account
 
 ##### Contributing
-  - You can contribute by extending the README file to contain more examples and explanations of how to use the package
-  - Please follow the eslint and prettier rules to ensure consistent code style
-  
- ##### Tests 
- To run tests you need to create a sandbox account you can do that [here](https://dev.wallets.africa/) after which you can add your public and private test keys to package.json
+
+-   You can contribute by extending the README file to contain more examples and explanations of how to use the package
+
+    -   Please follow the eslint and prettier rules to ensure consistent code style
+
+##### Tests
+
+To run tests you need to create a sandbox account you can do that [here](https://dev.wallets.africa/) after which you can add your public and private test keys to package.json
