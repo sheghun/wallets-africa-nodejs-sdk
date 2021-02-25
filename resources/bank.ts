@@ -11,7 +11,7 @@ class Bank {
      */
     static secretKey = '';
 
-    static endpoint = '/bank';
+    static endpoint = 'transfers/bank';
 
     /*
         Returns bank
